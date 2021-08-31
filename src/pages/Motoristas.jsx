@@ -1,9 +1,9 @@
-import Driverslist from '../components/DriversList'
+import ListaMotoristas from '../components/ListaMotoristas'
 
 function Home() {
   return (
     <>
-      <Driverslist />
+      <ListaMotoristas />
     </>
   );
 }

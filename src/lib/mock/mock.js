@@ -1,4 +1,4 @@
-export const data = [
+export const dadosAPI = [
 	{
 		"name": "Pouca Tripa",
 		"birth_date": "1976-09-22T00:00:00",

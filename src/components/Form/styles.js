@@ -16,6 +16,8 @@ export const Container = styled.div`
     margin-top: 15px;
     background-color: #273036;
     color: #f9cd00;
+    width: 100%;
+    height: 45px;
   }
 
   a {
