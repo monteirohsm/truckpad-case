@@ -10,8 +10,8 @@ const Header = () => {
     <Container>
       <Bar>
         <Grid container justifyContent="center">
-          <h1 style={{ color: '#f9cd00' }}>Truckpad</h1>
-          <LocalShippingIcon style={{ margin: '10px 5px', color: '#f9cd00' }} />
+          <h1>Truckpad</h1>
+          <LocalShippingIcon style={{ margin: '10px 5px', color: '#fad04e' }} />
         </Grid>
       </Bar>
     </Container>

@@ -9,11 +9,11 @@ export const GlobalStyles = createGlobalStyle`
 
   html, body {
     min-height: 100%;
-    background: #f9cd00;
-}
+    background-color: #f4f4f4;
+  };
 
   *, input, button {
     font-family: 'Roboto', sans-serif;
   }
   
-`
+`;

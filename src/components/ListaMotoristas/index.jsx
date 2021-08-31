@@ -1,14 +1,30 @@
 import React from 'react';
 import PaperMotoristas from '../PaperMotoristas';
+import { useHistory } from 'react-router';
 import { useMotoristas } from '../../context/MotoristasContext';
 
-import { Grid } from '@material-ui/core/';
+import { Grid,IconButton, Typography } from '@material-ui/core/';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+
+import { Flex } from './styles';
+
 
 const ListaMotoristas = () => {
+  const history = useHistory();
   const { listaDados } = useMotoristas();
+
+  function handleBack() {
+    history.replace('/');
+  }
 
   return (
     <>
+     <Flex>
+        <IconButton onClick={handleBack} >
+          <ChevronLeftIcon />
+        </IconButton>
+        <Typography style={{ color: '#383838' }} variant="h5">Motoristas Cadastrados</Typography>
+      </Flex>
       <Grid container justifyContent="center">
         {listaDados.map((motorista, index) => (
           <PaperMotoristas

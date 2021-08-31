@@ -7,8 +7,7 @@ import { Container } from './styles';
 const Footer = () => {
   return (
     <Container>
-      <Grid className="teste" lg={12} sm={12}>
-      </Grid>
+      <Grid lg={12} sm={12}></Grid>
     </Container>
   );
 };

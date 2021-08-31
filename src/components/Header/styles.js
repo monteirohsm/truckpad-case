@@ -6,7 +6,7 @@ export const Bar = styled.div`
   height: 70px;
   background-color: #273036;
   border: 1px solid black;
-  color: white;
+  color: #fad04e;
   display: flex;
   padding: 10px;
   margin-bottom: 50px;

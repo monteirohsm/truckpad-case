@@ -6,7 +6,11 @@ export const Container = styled.div`
   bottom: 0;
   width: 100%;
   background-color: #273036;
-  color: white;
   text-align: center;
   height: 7%;
+
+  @media (max-width: 1280px) {
+    height: 0;
+  }
 `;
+

@@ -14,19 +14,15 @@ const theme = createTheme({
       main: '#273036',
     },
     secondary: {
-      main: '#f9cd00',
-    },
-    background: {
-      default: '#383a59',
-      paper: '#282a36',
+      main: '#273036',
     },
     text: {
-      primary: '#fff',
+      primary: '#273036',
       secondary: ' #273036',
     },
   },
   shape: {
-    borderRadius: 0,
+    borderRadius: 45,
   },
   overrides: {
     MuiOutlinedInput: {

@@ -1,37 +1,20 @@
-import { React } from 'react';
+import { React, useState } from 'react';
 import { useMotoristas } from '../../context/MotoristasContext';
 import { Link } from 'react-router-dom';
-// import { getMotoristas } from '../../services/api/api';
 
-import { Grid, TextField, MenuItem, Button } from '@material-ui/core/';
+import {
+  Grid,
+  TextField,
+  Button,
+  Snackbar,
+  Typography,
+} from '@material-ui/core/';
+import MuiAlert from '@material-ui/lab/Alert';
 import InputMask from 'react-input-mask';
 
 import { Formik } from 'formik';
 import FadeIn from 'react-fade-in';
-import { Container } from './styles';
-
-const categorias = [
-  {
-    value: 'A',
-    label: 'A',
-  },
-  {
-    value: 'B',
-    label: 'B',
-  },
-  {
-    value: 'C',
-    label: 'C',
-  },
-  {
-    value: 'D',
-    label: 'D',
-  },
-  {
-    value: 'E',
-    label: 'E',
-  },
-];
+import { Container, Title} from './styles';
 
 function limparValues(values) {
   values.nome = '';
@@ -42,26 +25,48 @@ function limparValues(values) {
   values.tipoCNH = '';
 }
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 const Form = () => {
   const { listaDados, atualizarListaDados } = useMotoristas();
 
+  const [notificacao, setNotificacao] = useState(false);
+
+  const notificar = () => {
+    setNotificacao(true);
+  };
+
+  const handleCloseSnackBar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setNotificacao(false);
+  };
+
   return (
     <Container>
-      <Grid container>
+      <Grid container justify="center"
+      >
         <Grid
           container
+          item
           xs={12}
           lg={6}
           justifyContent="center"
           alignItems="center"
+          
         >
-          <FadeIn delay={400}>
-            <h1>CADASTRE UM MOTORISTA</h1>
+          <FadeIn delay={300}>
+            <Title variant="h5">CADASTRE UM MOTORISTA</Title>
           </FadeIn>
         </Grid>
 
         <Grid
           container
+          item
           xs={12}
           lg={6}
           justifyContent="center"
@@ -76,6 +81,23 @@ const Form = () => {
               cnh: '',
               tipoCNH: '',
               cpf: '',
+            }}
+            validate={(values) => {
+              const errors = {};
+              if (!values.nome) {
+                errors.nome = 'Campo obrigatório!';
+              } else if (!values.cpf | (values.cpf.length < 14)) {
+                errors.cpf = 'Campo obrigatório!';
+              } else if (!values.telefone) {
+                errors.telefone = 'Campo obrigatório!';
+              } else if (!values.data) {
+                errors.data = 'Campo obrigatório!';
+              } else if (!values.cnh) {
+                errors.cnh = 'Campo obrigatório!';
+              } else if (!values.tipoCNH) {
+                errors.tipoCNH = 'Campo obrigatório!';
+              }
+              return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
               const dadosMotorista = {
@@ -98,7 +120,7 @@ const Form = () => {
                     country: 'BR',
                     doc_type: 'CNH',
                     expires_at: '',
-                    number: '',
+                    number: values.cnh,
                   },
                   {
                     country: 'BR',
@@ -110,11 +132,11 @@ const Form = () => {
                 state: '',
                 telefone: values.telefone,
               };
+              console.log(values.cpf.length);
 
               atualizarListaDados([...listaDados, dadosMotorista]);
+              notificar();
 
-              // console.log(listaDados);
-              console.log(dadosMotorista);
               limparValues(values);
               setSubmitting(false);
             }}
@@ -131,7 +153,7 @@ const Form = () => {
               <form onSubmit={handleSubmit}>
                 <Grid container spacing={4}>
                   <Grid item xs={12} lg={12}>
-                    <FadeIn delay={400}>
+                    <FadeIn delay={300}>
                       <TextField
                         type="text"
                         name="nome"
@@ -143,12 +165,13 @@ const Form = () => {
                         fullWidth
                         className="input-class"
                       />
+                      {errors.nome && touched.nome && errors.nome}
                     </FadeIn>
                   </Grid>
                 </Grid>
                 <Grid container spacing={4}>
                   <Grid item xs={12} lg={12}>
-                    <FadeIn delay={400}>
+                    <FadeIn delay={300}>
                       <InputMask
                         mask="999.999.999-99"
                         value={values.cpf}
@@ -165,13 +188,14 @@ const Form = () => {
                           fullWidth
                         />
                       </InputMask>
+                      {errors.cpf && touched.cpf && errors.cpf}
                     </FadeIn>
                   </Grid>
                 </Grid>
 
                 <Grid container spacing={4}>
                   <Grid item xs={12} lg={6}>
-                    <FadeIn delay={400}>
+                    <FadeIn delay={300}>
                       <InputMask
                         mask="(99) 9 9999-9999"
                         value={values.telefone}
@@ -188,10 +212,11 @@ const Form = () => {
                           fullWidth
                         />
                       </InputMask>
+                      {errors.telefone && touched.telefone && errors.telefone}
                     </FadeIn>
                   </Grid>
                   <Grid item xs={12} lg={6}>
-                    <FadeIn delay={400}>
+                    <FadeIn delay={300}>
                       <InputMask
                         mask="99/99/9999"
                         value={values.data}
@@ -208,13 +233,14 @@ const Form = () => {
                           fullWidth
                         />
                       </InputMask>
+                      {errors.data && touched.data && errors.data}
                     </FadeIn>
                   </Grid>
                 </Grid>
 
                 <Grid container spacing={4}>
                   <Grid item xs={12} lg={6}>
-                    <FadeIn delay={400}>
+                    <FadeIn delay={300}>
                       <TextField
                         type="text"
                         name="cnh"
@@ -227,31 +253,29 @@ const Form = () => {
                         fullWidth
                       />
                     </FadeIn>
+                    {errors.cnh && touched.cnh && errors.cnh}
                   </Grid>
                   <Grid item xs={12} lg={6}>
-                    <FadeIn delay={400}>
+                    <FadeIn delay={300}>
                       <TextField
-                        id="outlined-select-currency"
-                        select
-                        label="Tipo de CNH"
-                        value={values.tipoCNH}
+                        type="text"
+                        name="tipoCNH"
                         onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.tipoCNH}
+                        label="Tipo de CNH"
                         variant="outlined"
+                        className="input-class"
                         fullWidth
-                      >
-                        {categorias.map((option) => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                          </MenuItem>
-                        ))}
-                      </TextField>
+                      />
                     </FadeIn>
+                    {errors.tipoCNH && touched.tipoCNH && errors.tipoCNH}
                   </Grid>
                 </Grid>
 
                 <Grid container xs={12} lg={12}>
                   <Grid style={{ width: '100%' }}>
-                    <FadeIn delay={600}>
+                    <FadeIn delay={500}>
                       <Button
                         type="submit"
                         variant="outlined"
@@ -265,13 +289,14 @@ const Form = () => {
                   </Grid>
 
                   <Link to="/motoristas" style={{ width: '100%' }}>
-                    <FadeIn delay={700}>
+                    <FadeIn delay={600}>
                       <Button
                         fullWidth
                         type="submit"
                         variant="outlined"
                         disabled={isSubmitting}
                         className="btn-class"
+                        style={{marginBottom: '16px'}}
                       >
                         VER MOTORISTAS
                       </Button>
@@ -281,6 +306,15 @@ const Form = () => {
               </form>
             )}
           </Formik>
+          <Snackbar
+            open={notificacao}
+            autoHideDuration={3000}
+            onClose={handleCloseSnackBar}
+          >
+            <Alert onClose={handleCloseSnackBar} severity="success">
+              Motorista cadastrado com sucesso!
+            </Alert>
+          </Snackbar>
         </Grid>
       </Grid>
     </Container>

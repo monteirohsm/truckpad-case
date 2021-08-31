@@ -5,7 +5,7 @@ export const Container = styled.div`
     width: 350px;
     margin: 10px;
     border-radius: 10px;
-    border: 1px solid #f9cd00;
+    background-image: linear-gradient(90deg, #face48, #fcde83);
   }
 
   .esquerda {
@@ -21,7 +21,7 @@ export const Container = styled.div`
     justify-content: space-between;
 
     h4, p {
-      color: #f9cd00
+      color: #273036;
     }
 
     h4 {
