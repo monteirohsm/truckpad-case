@@ -31,9 +31,9 @@ npm run start
 ```
 ## Recursos 📒
 
-- Página de cadastro de motoristas
-- Listagem que exibe os motoristas cadastrados em cards
-- Edição e exclusão de motoristas por meio dos cards
+- Página de cadastro de motoristas com inputs de nome, telefone, cpf...
+- Listagem que exibe os motoristas cadastrados em cards com suas respectivas informações
+- Edição e exclusão de motoristas por meio dos ícones de caneta e da lixeira exibidos nas extremidades superiores dos cards
 
 ## Tecnologias 🤖
 - React JS & Context API
