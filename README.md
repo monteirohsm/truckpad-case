@@ -1,6 +1,6 @@
-# Truckpad Case Front End
-
-🚛 Aplicação (CRUD) de motoristas desenvolvido para o case de Frot End da Truckpad.
+# 🚛 Truckpad Case Front End 
+ 
+Aplicação (CRUD) de motoristas desenvolvido para o case de Frot End da Truckpad.
 
 ## Instalação ⬇️ 
 
