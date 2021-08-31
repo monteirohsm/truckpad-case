@@ -7,7 +7,6 @@ import {
   TextField,
   Button,
   Snackbar,
-  Typography,
 } from '@material-ui/core/';
 import MuiAlert from '@material-ui/lab/Alert';
 import InputMask from 'react-input-mask';
